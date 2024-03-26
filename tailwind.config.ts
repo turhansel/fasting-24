@@ -15,20 +15,20 @@ const config = {
 			center: true,
 			padding: '2rem',
 			screens: {
-				'2xl': '1400px',
+				'2xl': '530px',
 			},
 		},
 		extend: {
-			extend: {
-				fontFamily: {
-					sans: ['var(--font-roboto)', ...fontFamily.sans],
-				},
+			fontFamily: {
+				roboto: ['var(--font-roboto)'],
+				sen: ['var(--font-sen)'],
 			},
 			colors: {
+				oxfordBlue: 'var(--oxfordBlue)',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
-				background: 'hsl(var(--background))',
+				background: 'var(--background)',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
