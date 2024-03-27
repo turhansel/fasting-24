@@ -24,7 +24,7 @@ export default function Header() {
 	};
 
 	return (
-		<header className='bg-white flex items-center w-full'>
+		<header className='bg-white flex items-center w-full relative'>
 			<Link className='mx-auto flex items-center gap-2 p-8' href='/'>
 				<svg width='50' height='50' viewBox='0 0 50 50'>
 					<path
@@ -41,7 +41,7 @@ export default function Header() {
 			<Button
 				onClick={handleSignOut}
 				variant={'secondary'}
-				className='p-[10px] rounded-full bg-[##D6D6D6] text-black mr-28'
+				className='p-[10px] rounded-full bg-[#D6D6D6] text-black absolute right-2 md:right-32'
 			>
 				<LogOutIcon size={16} />
 			</Button>

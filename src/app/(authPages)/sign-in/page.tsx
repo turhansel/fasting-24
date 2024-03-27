@@ -43,7 +43,7 @@ export default function Login() {
 			router.push('/');
 		} catch (error: any) {
 			const message = error?.data?.message;
-			toast.error(message ?? 'Unknown error');
+			toast.error(message ?? 'Please try again');
 		}
 	};
 
