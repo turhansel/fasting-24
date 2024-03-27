@@ -1,9 +1,10 @@
-import Image from 'next/image';
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
+export default async function Home() {
 	return (
-		<main className='flex min-h-screen flex-col items-center justify-between p-24'>
-			test
-		</main>
+		<div className='flex-1 w-full flex flex-col gap-20 items-center'>
+			authenticated user
+		</div>
 	);
 }
