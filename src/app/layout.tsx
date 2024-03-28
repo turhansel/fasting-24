@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Roboto, Sen } from 'next/font/google';
 import Header from '@/components/Header';
-import { Toaster } from '@/components/ui/sonner';
 import { StoreProvider } from './StoreProvider';
 
 const roboto = Roboto({
@@ -42,11 +41,6 @@ export default function RootLayout({
 					<main className='flex flex-col items-center container'>
 						{children}
 					</main>
-					<Toaster
-						richColors
-						expand={false}
-						position='bottom-center'
-					/>
 				</StoreProvider>
 			</body>
 		</html>
