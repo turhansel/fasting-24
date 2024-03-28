@@ -23,6 +23,7 @@ import {
 import { toast } from 'sonner';
 import { useSignInMutation } from '@/lib/redux/features/auth/authApiSlice';
 import { LoginSchema } from '@/lib/redux/features/auth/schemas';
+import Link from 'next/link';
 
 export default function Login() {
 	const router = useRouter();
@@ -39,8 +40,10 @@ export default function Login() {
 
 	const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
 		try {
-			await signIn(values).unwrap();
-			router.push('/');
+			const result = await signIn(values).unwrap();
+			
+			result?.status === 200 && router.push('/');
+			result?.status === 400 && toast.error(result.message);
 		} catch (error: any) {
 			const message = error?.data?.message;
 			toast.error(message ?? 'Please try again');
@@ -67,7 +70,7 @@ export default function Login() {
 								<FormItem>
 									<FormControl>
 										<Input
-											placeholder='turti@example.com'
+											placeholder='E-mail'
 											{...field}
 										/>
 									</FormControl>
@@ -85,7 +88,7 @@ export default function Login() {
 									<FormControl>
 										<Input
 											type='password'
-											placeholder='••••••••'
+											placeholder='Password'
 											{...field}
 										/>
 									</FormControl>
@@ -95,7 +98,7 @@ export default function Login() {
 							)}
 						/>
 					</CardContent>
-					<CardFooter>
+					<CardFooter className='flex flex-col gap-4'>
 						<Button
 							size='lg'
 							className='w-full'
@@ -104,6 +107,12 @@ export default function Login() {
 						>
 							Login
 						</Button>
+						<Link
+							href='/sign-up'
+							className='text-center text-sm text-primaryBlack underline'
+						>
+							Back to Register
+						</Link>
 					</CardFooter>
 				</Card>
 			</form>

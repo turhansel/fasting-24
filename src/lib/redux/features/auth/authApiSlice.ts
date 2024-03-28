@@ -9,7 +9,10 @@ export const authApiSlice = createApi({
 	reducerPath: 'authApi',
 	tagTypes: ['Auth'],
 	endpoints: (build) => ({
-		signIn: build.mutation<any, z.infer<typeof LoginSchema>>({
+		signIn: build.mutation<
+			{ message: string; status: number },
+			z.infer<typeof LoginSchema>
+		>({
 			query: (body) => ({
 				url: '/sign-in',
 				method: 'POST',

@@ -3,6 +3,7 @@ import './globals.css';
 import { Roboto, Sen } from 'next/font/google';
 import Header from '@/components/Header';
 import { StoreProvider } from './StoreProvider';
+import { Toaster } from 'sonner';
 
 const roboto = Roboto({
 	subsets: ['latin'],
@@ -41,6 +42,11 @@ export default function RootLayout({
 					<main className='flex flex-col items-center container'>
 						{children}
 					</main>
+					<Toaster
+						richColors
+						expand={false}
+						position='bottom-center'
+					/>
 				</StoreProvider>
 			</body>
 		</html>

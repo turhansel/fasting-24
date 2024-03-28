@@ -51,6 +51,34 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 	const [fastingDuration, setFastingDuration] = useState('');
 	const [progressValue, setProgressValue] = useState(0);
 
+	const getPayload = useCallback(
+		(values: z.infer<typeof FastingFormSchema>) => {
+			const baseDate = dayjs().format('YYYY-MM-DD');
+
+			let startDateTimeStamp = dayjs(
+				`${baseDate}T${values.start_date}:00`
+			);
+			let endDateTimeStamp = dayjs(
+				`${baseDate}T${dayjs().format('HH:mm')}:00`
+			);
+
+			if (endDateTimeStamp.isBefore(startDateTimeStamp)) {
+				endDateTimeStamp = endDateTimeStamp.add(1, 'day');
+			}
+
+			const duration = endDateTimeStamp.diff(
+				startDateTimeStamp,
+				'second'
+			);
+
+			return {
+				duration,
+				end_date: endDateTimeStamp.toISOString(),
+			};
+		},
+		[startDate, endDate]
+	);
+
 	useEffect(() => {
 		const updateProgress = async () => {
 			const now = dayjs();
@@ -99,35 +127,7 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 		updateProgress();
 
 		return () => clearInterval(interval);
-	}, [startDate, endDate]);
-
-	const getPayload = useCallback(
-		(values: z.infer<typeof FastingFormSchema>) => {
-			const baseDate = dayjs().format('YYYY-MM-DD');
-
-			let startDateTimeStamp = dayjs(
-				`${baseDate}T${values.start_date}:00`
-			);
-			let endDateTimeStamp = dayjs(
-				`${baseDate}T${dayjs().format('HH:mm')}:00`
-			);
-
-			if (endDateTimeStamp.isBefore(startDateTimeStamp)) {
-				endDateTimeStamp = endDateTimeStamp.add(1, 'day');
-			}
-
-			const duration = endDateTimeStamp.diff(
-				startDateTimeStamp,
-				'second'
-			);
-
-			return {
-				duration,
-				end_date: endDateTimeStamp.toISOString(),
-			};
-		},
-		[startDate, endDate]
-	);
+	}, [startDate, endDate, getPayload, getValues, inProgressFasting?.id]);
 
 	const onSubmit = async (values: z.infer<typeof FastingFormSchema>) => {
 		const payload = getPayload(values);

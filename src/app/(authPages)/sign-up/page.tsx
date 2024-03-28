@@ -128,7 +128,7 @@ export default function SignUp() {
 
 						<Link
 							href='/sign-in'
-							className='text-center text-sm text-black'
+							className='text-center text-sm text-primaryBlack underline'
 						>
 							Already have an account? Sign in
 						</Link>
