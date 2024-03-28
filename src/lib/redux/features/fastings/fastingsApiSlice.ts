@@ -46,7 +46,7 @@ export const fastingsApiSlice = createApi({
 			{ message: string },
 			UpdateFastingRequest
 		>({
-			invalidatesTags: ['Fastings'],
+			invalidatesTags: ['Fastings', 'Draft'],
 			query: (body) => ({
 				url: `/${body.fastingId}`,
 				method: 'PATCH',
