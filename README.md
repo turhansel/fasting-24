@@ -23,8 +23,8 @@
     -   Redux, Redux Toolkit, Redux Toolkit Query
     -   Styling with [Tailwind CSS](https://tailwindcss.com)
     -   UI components [shadcn/ui](https://ui.shadcn.com/)
-    -   It just works!
     -   supabase-ssr. A package to configure Supabase Auth to use cookies
+    -   It just works!
 
 ## Demo
 
@@ -49,9 +49,9 @@ cp .env.local.example .env.local
 4. Then set each variable on `.env.local`:
 
 ```
-   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
-   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
+NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
 Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
