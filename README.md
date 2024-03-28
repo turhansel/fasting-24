@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+      <h1>fasting-24</h1>
+ </div>
 
-## Getting Started
+## [LIVE DEMO](https://fasting-24.vercel.app)
 
-First, run the development server:
+<img src="https://github.com/turhansel/fasting-24/blob/main/fasting24-1.png?raw=true" alt='fasting-ss' width='50%'/>
+<img src="https://github.com/turhansel/fasting-24/blob/main/fasting24-2.png?raw=true" alt='fasting-ss' width='50%'/>
+
+## 📦 Configuration
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/turhansel/fasting-24
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Step 1. Set up environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Copy the `.env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+cp .env.local.example .env.local
+```
 
-## Learn More
+Then set each variable on `.env.local`:
 
-To learn more about Next.js, take a look at the following resources:
+## Step 2. Run Next.js in development mode
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<p align="center">
+  <a href="#features"><strong>Features</strong></a> ·
+  <a href="#demo"><strong>Demo</strong></a> ·
+  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
+  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
+</p>
+<br/>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Features
 
-## Deploy on Vercel
+    -   Works across the entire [Next.js](https://nextjs.org) stack
+    -   App Router
+    -   Middleware
+    -   Client
+    -   Server
+    -   Supabase
+    -   Redux, Redux Toolkit, Redux Toolkit Query
+    -   Styling with [Tailwind CSS](https://tailwindcss.com)
+    -   UI components [shadcn/ui](https://ui.shadcn.com/)
+    -   It just works!
+    -   supabase-ssr. A package to configure Supabase Auth to use cookies
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Demo
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+You can view a fully working demo at [DEMO](https://fasting-24.vercel.app/).
+
+## Clone and run locally
+
+```bash
+bun install
+bun dev
+
+# or
+
+npm install
+npm run dev
+
+# or
+
+pnpm install
+pnpm dev
+
+# or
+
+yarn install
+yarn dev
+```
+
+1.  You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+
+2.  Clone project
+
+        ```bash
+
+    git clone https://github.com/turhansel/fasting-24
+
+````
+
+3. Copy the `.env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
+
+```bash
+cp .env.local.example .env.local
+```
+
+4. then set each variable on `.env.local`:
+
+    ```
+    NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
+    NEXT_PUBLIC_SITE_URL=http://localhost:3000
+    ```
+
+    Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
+
+5. You can now run the Next.js local development server:
+
+    ```bash
+bun install
+bun dev
+
+# or
+
+npm install
+npm run dev
+
+# or
+
+pnpm install
+pnpm dev
+
+# or
+
+yarn install
+yarn dev
+```
+
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
+
+## Feedback and issues
+
+Please file feedback and issues over on the [fasting-24](https://github.com/turhansel/fasting-24/issues/new).
+````
