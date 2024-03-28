@@ -24,8 +24,11 @@ import { Button } from '@/components/ui/button';
 import { SignUpSchema } from '@/lib/redux/features/auth/schemas';
 import { useSignUpMutation } from '@/lib/redux/features/auth/authApiSlice';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function SignUp() {
+	const router = useRouter();
+
 	const form = useForm<z.infer<typeof SignUpSchema>>({
 		resolver: zodResolver(SignUpSchema),
 		defaultValues: {
@@ -41,6 +44,7 @@ export default function SignUp() {
 		try {
 			const result = await signUp(values).unwrap();
 			toast.success(result.message);
+			router.push('/sign-in');
 		} catch (error: any) {
 			const message = error?.data?.message;
 			toast.error(message ?? 'Unknown error');
