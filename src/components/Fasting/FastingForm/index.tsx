@@ -5,11 +5,13 @@ import CreateForm from './CreateForm';
 import FastingInProgressForm from './FastingInProgressForm';
 import FastingCompletedForm from './FastingPreCompletedForm';
 import React from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const FastingForm: React.FC = () => {
-	const { data, isLoading } = useUseGetDraftFormValuesQuery();
+	const { data, isLoading, isFetching } = useUseGetDraftFormValuesQuery();
 
-	if (isLoading) return <div>Loading...</div>;
+	if (isLoading || isFetching)
+		return <Skeleton className='h-[514px] w-[530px] rounded-xl' />;
 
 	if (!!data?.inProgressFasting) return <FastingInProgressForm {...data} />;
 
