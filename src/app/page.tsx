@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import FastingStatistics from '@/components/Fasting/FastingStatistics';
 import FastingList from '@/components/Fasting/FastingList';
 import FastingForm from '@/components/Fasting/FastingForm';
+import { FastingStatus } from '@/lib/types';
 
 export default async function Home() {
 	const supabase = createClient();
@@ -14,8 +15,8 @@ export default async function Home() {
 	// This Supabase query updates the status of fasting records to 'Completed' for a specific user. It targets records where the 'status' is 'InProgress', the 'user_id' matches the current user's ID, and the 'end_date' is in the past relative to the current time.
 	await supabase
 		.from('fastings')
-		.update({ status: 'Completed' })
-		.match({ status: 'InProgress' })
+		.update({ status: FastingStatus.PreCompleted })
+		.match({ status: FastingStatus.InProgress })
 		.eq('user_id', user?.id)
 		.lte('end_date', new Date().toISOString());
 

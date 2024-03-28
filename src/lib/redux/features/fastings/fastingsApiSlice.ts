@@ -1,6 +1,9 @@
 import {
 	CompletedFastingsResponse,
 	CompletedFastingsStatisticsResponse,
+	CreateFastingRequest,
+	DraftFormResponse,
+	UpdateFastingRequest,
 } from '@/lib/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import dayjs from 'dayjs';
@@ -10,7 +13,7 @@ export const fastingsApiSlice = createApi({
 		baseUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/fastings`,
 	}),
 	reducerPath: 'fastingsApi',
-	tagTypes: ['Fastings'],
+	tagTypes: ['Fastings', 'Draft'],
 	endpoints: (build) => ({
 		getCompletedFastingsByUserId: build.query<
 			CompletedFastingsResponse,
@@ -18,15 +21,47 @@ export const fastingsApiSlice = createApi({
 		>({
 			providesTags: ['Fastings'],
 			query: () => ({
-				url: '',
+				url: '/completed',
 				method: 'GET',
 			}),
 		}),
-		deleteFasting: build.mutation<any, { fastingId: number }>({
+		useGetDraftFormValues: build.query<DraftFormResponse, void>({
+			providesTags: ['Draft'],
+			query: () => ({
+				url: '/draft',
+				method: 'GET',
+			}),
+		}),
+		deleteFasting: build.mutation<
+			{ message: string },
+			{ fastingId: number }
+		>({
 			invalidatesTags: ['Fastings'],
 			query: ({ fastingId }) => ({
 				url: `/${fastingId}`,
+				method: 'DELETE',
+			}),
+		}),
+		updateFasting: build.mutation<
+			{ message: string },
+			UpdateFastingRequest
+		>({
+			invalidatesTags: ['Fastings'],
+			query: (body) => ({
+				url: `/${body.fastingId}`,
 				method: 'PATCH',
+				body,
+			}),
+		}),
+		createNewFasting: build.mutation<
+			{ message: string },
+			CreateFastingRequest
+		>({
+			invalidatesTags: ['Fastings', 'Draft'],
+			query: (body) => ({
+				url: '',
+				method: 'POST',
+				body,
 			}),
 		}),
 	}),
@@ -35,6 +70,9 @@ export const fastingsApiSlice = createApi({
 export const {
 	useGetCompletedFastingsByUserIdQuery,
 	useDeleteFastingMutation,
+	useCreateNewFastingMutation,
+	useUseGetDraftFormValuesQuery,
+	useUpdateFastingMutation,
 } = fastingsApiSlice;
 
 export const useGetCompletedFastingsStatistics =
