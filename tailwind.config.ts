@@ -24,6 +24,12 @@ const config = {
 			},
 			colors: {
 				oxfordBlue: 'var(--oxfordBlue)',
+				primaryPurple: 'var(--primaryPurple)',
+				gray400: 'var(--gray400)',
+				purple: 'var(--purple)',
+				lavenderBlue: 'var(--lavenderBlue)',
+				primaryLight200: 'var(--primaryLight200)',
+				primaryBlack: 'var(--primaryBlack)',
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
