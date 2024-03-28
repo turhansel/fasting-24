@@ -44,7 +44,6 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 
 	const { getValues } = form;
 
-	console.log('getValues', getValues());
 
 	const [updateMutation, { isLoading }] = useUpdateFastingMutation();
 

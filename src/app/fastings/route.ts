@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
 	const supabase = createClient();
-	console.log('Im working');
 	const { start_date, end_date, duration } = await request.json();
 
 	const {
