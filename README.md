@@ -58,10 +58,9 @@ Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found
 
 5.  You can now run the Next.js local development server:
 
-        ```
-
-    bun install
-    bun dev
+```bash
+bun install
+bun dev
 
 # or
 
@@ -78,7 +77,6 @@ pnpm dev
 yarn install
 yarn dev
 ```
-
 
 -   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
