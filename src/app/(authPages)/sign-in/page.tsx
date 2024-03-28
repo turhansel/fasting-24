@@ -41,7 +41,7 @@ export default function Login() {
 	const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
 		try {
 			const result = await signIn(values).unwrap();
-			
+
 			result?.status === 200 && router.push('/');
 			result?.status === 400 && toast.error(result.message);
 		} catch (error: any) {
@@ -54,7 +54,7 @@ export default function Login() {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='animate-in flex flex-col w-full justify-center gap-2 text-foreground mt-32'
+				className='animate-in flex flex-col w-full justify-center gap-2 text-foreground mt-16 sm:mt-32 px-2 sm:px-0'
 			>
 				<Card className='w-full'>
 					<CardHeader>

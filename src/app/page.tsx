@@ -22,7 +22,7 @@ export default async function Home() {
 
 	return (
 		<>
-			<h2 className='mt-[50px] mb-[36px] font-bold text-primaryBlack'>
+			<h2 className='mt-8 sm:mt-[50px] mb-4 sm:mb-[36px] font-bold text-primaryBlack'>
 				<span className='font-normal'>Hello</span>{' '}
 				{user?.user_metadata?.first_name}
 			</h2>

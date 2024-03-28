@@ -147,7 +147,7 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='animate-in flex flex-col w-full justify-center gap-2 text-foreground'
+				className='animate-in flex flex-col w-full justify-center gap-2 text-foreground p-2 sm:p-0'
 			>
 				<Card className='w-full '>
 					<CardHeader className='pt-16'>
@@ -170,7 +170,7 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 							</div>
 						</ProgressCircle>
 
-						<div className='flex items-center px-20 gap-4 mt-4'>
+						<div className='flex items-center justify-between mt-4 px-2 sm:px-12'>
 							<FormField
 								control={form.control}
 								name='start_date'

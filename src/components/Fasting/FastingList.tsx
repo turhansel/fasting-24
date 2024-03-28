@@ -39,9 +39,9 @@ const FastingList: React.FC = () => {
 	}
 
 	return (
-		<div className='flex flex-col items-center w-full gap-[20px] mt-10 mb-10'>
+		<div className='flex flex-col items-center w-full gap-3 sm:gap-[20px] mt-10 mb-10 px-2 sm:px-0'>
 			<div className='flex items-center justify-between w-full'>
-				<h2 className='text-primaryBlack font-bold text-2xl'>
+				<h2 className='text-primaryBlack font-bold text-xl sm:text-2xl'>
 					My Latest Fastings
 				</h2>
 
@@ -52,17 +52,17 @@ const FastingList: React.FC = () => {
 
 			{data?.completedFastings?.map((fasting) => (
 				<Card key={fasting.id} className='w-full'>
-					<CardContent className='p-[30px] flex items-center justify-between'>
+					<CardContent className='p-6 sm:p-[30px] flex items-center justify-between'>
 						<div className='flex flex-col'>
 							<div className='flex items-center gap-[14px]'>
-								<span className='text-purple font-bold text-[32px]'>
+								<span className='text-purple font-bold text-xl sm:text-[32px]'>
 									{formatDuration(fasting.duration)}
 								</span>
 								<Badge className='select-none'>
 									{timeDiffFromNow(fasting.end_date)}
 								</Badge>
 							</div>
-							<span className='text-gray400'>{`${dayjs(
+							<span className='text-gray400 text-xs sm:text-base'>{`${dayjs(
 								fasting.start_date
 							).format('hh:mm')} - ${dayjs(
 								fasting.end_date

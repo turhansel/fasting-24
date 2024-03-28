@@ -55,7 +55,7 @@ export default function SignUp() {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className='animate-in flex flex-col w-full justify-center gap-2 text-foreground mt-32'
+				className='animate-in flex flex-col w-full justify-center gap-2 text-foreground mt-16 sm:mt-32 px-2 sm:px-0'
 			>
 				<Card className='w-full '>
 					<CardHeader>
