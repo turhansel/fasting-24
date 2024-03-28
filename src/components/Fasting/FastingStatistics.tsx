@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useGetCompletedFastingsStatistics } from '@/lib/redux/features/fastings/fastingsApiSlice';
-import { Card, CardContent } from './ui/card';
+import { Card, CardContent } from '../ui/card';
 
 const FastingStatistics: React.FC = () => {
 	const data = useGetCompletedFastingsStatistics();

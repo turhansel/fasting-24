@@ -1,8 +1,8 @@
 import { createClient } from '@/lib/supabase/server';
 
-import FastingStatistics from '@/components/FastingStatistics';
-import FastingList from '@/components/FastingList';
-import FastingForm from '@/components/FastingForm';
+import FastingStatistics from '@/components/Fasting/FastingStatistics';
+import FastingList from '@/components/Fasting/FastingList';
+import FastingForm from '@/components/Fasting/FastingForm';
 
 export default async function Home() {
 	const supabase = createClient();

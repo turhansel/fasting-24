@@ -1,15 +1,14 @@
 'use client';
 
-import { CompletedFastingsResponse } from '@/lib/types';
 import Link from 'next/link';
 import React from 'react';
-import { Card, CardContent } from './ui/card';
+import { Card, CardContent } from '../ui/card';
 import { formatDuration, timeDiffFromNow } from '@/lib/utils/durationUtils';
 import dayjs from 'dayjs';
-import { Badge } from './ui/badge';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Badge } from '../ui/badge';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { EllipsisVerticalIcon, Trash2Icon, TrashIcon } from 'lucide-react';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import {
 	useDeleteFastingMutation,
 	useGetCompletedFastingsByUserIdQuery,
@@ -31,13 +30,13 @@ const FastingList: React.FC = () => {
 		}
 	};
 
-	if (!data?.completedFastings?.length || error) {
-		return null;
-	}
-
 	const loading = isLoading || isLoadingDeleteMutation;
 
 	if (loading) return <div>Loading...</div>;
+
+	if (!data?.completedFastings?.length || error) {
+		return null;
+	}
 
 	return (
 		<div className='flex flex-col items-center w-full gap-[20px] mt-10 mb-10'>
