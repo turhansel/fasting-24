@@ -43,7 +43,10 @@ const FastingPreCompletedForm: React.FC<DraftFormResponse> = ({
 	});
 
 	const totalDurationSeconds = endDate.diff(startDate, 'second');
-	const progressValue = (totalDurationSeconds / totalDurationSeconds) * 100;
+	const progressValue =
+		totalDurationSeconds > 0
+			? (totalDurationSeconds / totalDurationSeconds) * 100
+			: 0;
 
 	const hours = Math.floor(totalDurationSeconds / 3600);
 	const minutes = Math.floor((totalDurationSeconds % 3600) / 60);
@@ -66,7 +69,7 @@ const FastingPreCompletedForm: React.FC<DraftFormResponse> = ({
 			toast.error(message ?? 'Unknown error');
 		}
 	};
-
+	console.log('progressValue', progressValue);
 	return (
 		<Form {...form}>
 			<Confetti width={window.innerWidth} height={window.innerHeight} />
@@ -143,7 +146,7 @@ const FastingPreCompletedForm: React.FC<DraftFormResponse> = ({
 							loading={isLoading}
 							disabled={isLoading}
 						>
-							End Fasting
+							Start New Fasting Session
 						</Button>
 					</CardFooter>
 				</Card>
