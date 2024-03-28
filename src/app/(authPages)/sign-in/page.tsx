@@ -53,7 +53,7 @@ export default function Login() {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className='animate-in flex flex-col w-full justify-center gap-2 text-foreground mt-32'
 			>
-				<Card className='w-full '>
+				<Card className='w-full'>
 					<CardHeader>
 						<CardTitle className='text-2xl text-center'>
 							Login
@@ -97,6 +97,7 @@ export default function Login() {
 					</CardContent>
 					<CardFooter>
 						<Button
+							size='lg'
 							className='w-full'
 							type='submit'
 							loading={isLoading}

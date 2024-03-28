@@ -59,10 +59,10 @@ export default function SignUp() {
 			>
 				<Card className='w-full '>
 					<CardHeader>
-						<CardTitle className='text-2xl text-center'>
+						<CardTitle className='text-2xl text-center text-primaryBlack'>
 							Create New Profile
 						</CardTitle>
-						<CardDescription className='text-center'>
+						<CardDescription className='text-center text-primaryBlack'>
 							Start Your Fasting Journey
 						</CardDescription>
 					</CardHeader>
@@ -73,10 +73,7 @@ export default function SignUp() {
 							render={({ field }) => (
 								<FormItem>
 									<FormControl>
-										<Input
-											placeholder='John Doe'
-											{...field}
-										/>
+										<Input placeholder='Name' {...field} />
 									</FormControl>
 
 									<FormMessage />
@@ -91,7 +88,7 @@ export default function SignUp() {
 								<FormItem>
 									<FormControl>
 										<Input
-											placeholder='turti@example.com'
+											placeholder='E-mail'
 											{...field}
 										/>
 									</FormControl>
@@ -109,7 +106,7 @@ export default function SignUp() {
 									<FormControl>
 										<Input
 											type='password'
-											placeholder='••••••••'
+											placeholder='Password'
 											{...field}
 										/>
 									</FormControl>
@@ -121,6 +118,7 @@ export default function SignUp() {
 					</CardContent>
 					<CardFooter className='flex flex-col gap-4'>
 						<Button
+							size='lg'
 							className='w-full'
 							type='submit'
 							loading={isLoading}
