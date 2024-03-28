@@ -46,19 +46,19 @@ git clone https://github.com/turhansel/fasting-24
 cp .env.local.example .env.local
 ```
 
-4.  then set each variable on `.env.local`:
+4. Then set each variable on `.env.local`:
 
-    ```
-    NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-    NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
-    NEXT_PUBLIC_SITE_URL=http://localhost:3000
-    ```
+```
+   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
 
-    Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
+Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
 
 5.  You can now run the Next.js local development server:
 
-        ```bash
+        ```
 
     bun install
     bun dev
@@ -77,10 +77,10 @@ pnpm dev
 
 yarn install
 yarn dev
-
 ```
 
-- Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+-   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 > Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
 
