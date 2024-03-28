@@ -2,28 +2,7 @@
       <h1>fasting-24</h1>
  </div>
 
-## [LIVE DEMO](https://fasting-24.vercel.app)
-
-<img src="https://github.com/turhansel/fasting-24/blob/main/fasting24-1.png?raw=true" alt='fasting-ss' width='50%'/>
-<img src="https://github.com/turhansel/fasting-24/blob/main/fasting24-2.png?raw=true" alt='fasting-ss' width='50%'/>
-
-## 📦 Configuration
-
-```bash
-git clone https://github.com/turhansel/fasting-24
-```
-
-### Step 1. Set up environment variables
-
-Copy the `.env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
-
-```bash
-cp .env.local.example .env.local
-```
-
-Then set each variable on `.env.local`:
-
-## Step 2. Run Next.js in development mode
+<img src="https://github.com/turhansel/fasting-24/blob/main/fasting24-2.png?raw=true" alt='fasting-ss' width='100%'/>
 
 <p align="center">
   <a href="#features"><strong>Features</strong></a> ·
@@ -53,35 +32,13 @@ You can view a fully working demo at [DEMO](https://fasting-24.vercel.app/).
 
 ## Clone and run locally
 
-```bash
-bun install
-bun dev
-
-# or
-
-npm install
-npm run dev
-
-# or
-
-pnpm install
-pnpm dev
-
-# or
-
-yarn install
-yarn dev
-```
-
 1.  You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
 
 2.  Clone project
 
-        ```bash
-
-    git clone https://github.com/turhansel/fasting-24
-
-````
+```bash
+git clone https://github.com/turhansel/fasting-24
+```
 
 3. Copy the `.env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
 
@@ -89,7 +46,7 @@ yarn dev
 cp .env.local.example .env.local
 ```
 
-4. then set each variable on `.env.local`:
+4.  then set each variable on `.env.local`:
 
     ```
     NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
@@ -99,11 +56,12 @@ cp .env.local.example .env.local
 
     Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
 
-5. You can now run the Next.js local development server:
+5.  You can now run the Next.js local development server:
 
-    ```bash
-bun install
-bun dev
+        ```bash
+
+    bun install
+    bun dev
 
 # or
 
@@ -119,13 +77,13 @@ pnpm dev
 
 yarn install
 yarn dev
+
 ```
 
-    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 > Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
 
 ## Feedback and issues
 
 Please file feedback and issues over on the [fasting-24](https://github.com/turhansel/fasting-24/issues/new).
-````
