@@ -69,7 +69,7 @@ const FastingPreCompletedForm: React.FC<DraftFormResponse> = ({
 			toast.error(message ?? 'Unknown error');
 		}
 	};
-	console.log('progressValue', progressValue);
+
 	return (
 		<Form {...form}>
 			<Confetti width={window.innerWidth} height={window.innerHeight} />
