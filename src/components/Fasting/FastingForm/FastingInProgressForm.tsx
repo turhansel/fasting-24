@@ -47,7 +47,29 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 
 	const [updateMutation, { isLoading }] = useUpdateFastingMutation();
 
-	const [fastingDuration, setFastingDuration] = useState('');
+	const calculateStartAndEndTimes = useCallback(() => {
+		const now = dayjs();
+		const startOfDay = now.startOf('day');
+		let startDateTime = startOfDay
+			.add(startDate.hour(), 'hour')
+			.add(startDate.minute(), 'minute');
+		let endDateTime = startOfDay
+			.add(endDate.hour(), 'hour')
+			.add(endDate.minute(), 'minute');
+
+		if (endDateTime.isBefore(startDateTime)) {
+			endDateTime = endDateTime.add(1, 'day');
+		}
+
+		return { startDateTime, endDateTime };
+	}, [startDate, endDate]);
+
+	const { startDateTime, endDateTime } = calculateStartAndEndTimes();
+	const totalDuration = endDateTime.diff(startDateTime, 'second');
+	const now = dayjs();
+	const elapsed = now.diff(startDateTime, 'second');
+	const remaining = Math.max(0, totalDuration - elapsed);
+
 	const [progressValue, setProgressValue] = useState(0);
 
 	const getPayload = useCallback(
@@ -77,31 +99,6 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 		},
 		[startDate, endDate]
 	);
-
-	const now = dayjs();
-	const startOfDay = now.startOf('day');
-	const startDateTime = startOfDay
-		.add(startDate.hour(), 'hour')
-		.add(startDate.minute(), 'minute');
-	const endDateTime = startOfDay
-		.add(endDate.hour(), 'hour')
-		.add(endDate.minute(), 'minute');
-	const totalDuration = endDateTime.diff(startDateTime, 'second');
-	const elapsed = now.diff(startDateTime, 'second');
-	const remaining = Math.max(0, totalDuration - elapsed);
-
-	useEffect(() => {
-		const remaining = Math.max(0, totalDuration - elapsed);
-		const hours = Math.floor(remaining / 3600);
-		const minutes = Math.floor((remaining % 3600) / 60);
-		const seconds = remaining % 60;
-
-		setFastingDuration(
-			`${hours.toString().padStart(2, '0')}:${minutes
-				.toString()
-				.padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
-		);
-	}, [totalDuration, elapsed]); // Dependencies on which the calculation depends
 
 	useEffect(() => {
 		const progress = Math.min(
@@ -137,6 +134,8 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 		onEnd: handleComplete,
 	});
 
+	console.log('coundtDown', coundtDown);
+
 	return (
 		<Form {...form}>
 			<form
@@ -159,7 +158,9 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 									Elapsed Time (%{Math.round(progressValue)})
 								</span>
 								<div className='text-2xl font-bold text-primaryBlack'>
-									{fastingDuration}
+									{dayjs
+										.duration(coundtDown, 'seconds')
+										.format('HH:mm:ss')}
 								</div>
 							</div>
 						</ProgressCircle>

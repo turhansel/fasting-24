@@ -16,7 +16,6 @@ export default function useCountdown({
 			setTimeLeft((prevTimeLeft) => {
 				if (prevTimeLeft <= 0) {
 					clearInterval(timer);
-
 					if (onEnd) {
 						onEnd();
 					}
