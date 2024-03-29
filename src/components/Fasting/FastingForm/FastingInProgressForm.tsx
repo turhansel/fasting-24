@@ -27,6 +27,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { DraftFormResponse } from '@/lib/types';
 import { useUpdateFastingMutation } from '@/lib/redux/features/fastings/fastingsApiSlice';
 import ProgressCircle from '@/components/CircularProgressBar';
+import useCountdown from '@/lib/hooks/useCountdown';
 
 const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 	inProgressFasting,
@@ -43,7 +44,6 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 	});
 
 	const { getValues } = form;
-
 
 	const [updateMutation, { isLoading }] = useUpdateFastingMutation();
 
@@ -78,55 +78,38 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 		[startDate, endDate]
 	);
 
+	const now = dayjs();
+	const startOfDay = now.startOf('day');
+	const startDateTime = startOfDay
+		.add(startDate.hour(), 'hour')
+		.add(startDate.minute(), 'minute');
+	const endDateTime = startOfDay
+		.add(endDate.hour(), 'hour')
+		.add(endDate.minute(), 'minute');
+	const totalDuration = endDateTime.diff(startDateTime, 'second');
+	const elapsed = now.diff(startDateTime, 'second');
+	const remaining = Math.max(0, totalDuration - elapsed);
+
 	useEffect(() => {
-		const updateProgress = async () => {
-			const now = dayjs();
-			const startOfDay = now.startOf('day');
-			const startDateTime = startOfDay
-				.add(startDate.hour(), 'hour')
-				.add(startDate.minute(), 'minute');
-			const endDateTime = startOfDay
-				.add(endDate.hour(), 'hour')
-				.add(endDate.minute(), 'minute');
-			const totalDuration = endDateTime.diff(startDateTime, 'second');
-			const elapsed = now.diff(startDateTime, 'second');
-			const progress = Math.min(
-				100,
-				Math.max(0, (elapsed / totalDuration) * 100)
-			);
+		const remaining = Math.max(0, totalDuration - elapsed);
+		const hours = Math.floor(remaining / 3600);
+		const minutes = Math.floor((remaining % 3600) / 60);
+		const seconds = remaining % 60;
 
-			setProgressValue(progress);
+		setFastingDuration(
+			`${hours.toString().padStart(2, '0')}:${minutes
+				.toString()
+				.padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+		);
+	}, [totalDuration, elapsed]); // Dependencies on which the calculation depends
 
-			const remaining = Math.max(0, totalDuration - elapsed);
-			const hours = Math.floor(remaining / 3600);
-			const minutes = Math.floor((remaining % 3600) / 60);
-			const seconds = remaining % 60;
-			setFastingDuration(
-				`${hours.toString().padStart(2, '0')}:${minutes
-					.toString()
-					.padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
-			);
-
-			if (remaining <= 0) {
-				clearInterval(interval);
-
-				toast.info('Congrats! You have completed your fasting.');
-
-				const payload = getPayload(getValues());
-				const result = await updateMutation({
-					fastingId: inProgressFasting?.id!,
-					endFasting: true,
-					...payload,
-				}).unwrap();
-				toast.success(result.message);
-			}
-		};
-
-		const interval = setInterval(updateProgress, 1000);
-		updateProgress();
-
-		return () => clearInterval(interval);
-	}, [startDate, endDate, getPayload, getValues, inProgressFasting?.id]);
+	useEffect(() => {
+		const progress = Math.min(
+			100,
+			Math.max(0, (elapsed / totalDuration) * 100)
+		);
+		setProgressValue(progress);
+	}, [elapsed, totalDuration]);
 
 	const onSubmit = async (values: z.infer<typeof FastingFormSchema>) => {
 		const payload = getPayload(values);
@@ -142,6 +125,17 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 			toast.error(message ?? 'Unknown error');
 		}
 	};
+
+	const handleComplete = async () => {
+		toast.info('Congrats! You have completed your fasting.');
+		await onSubmit(getValues());
+	};
+
+	const coundtDown = useCountdown({
+		interval: 1000,
+		duration: remaining,
+		onEnd: handleComplete,
+	});
 
 	return (
 		<Form {...form}>
