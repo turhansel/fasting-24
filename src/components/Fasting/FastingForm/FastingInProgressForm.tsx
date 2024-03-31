@@ -134,8 +134,6 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 		onEnd: handleComplete,
 	});
 
-	console.log('coundtDown', coundtDown);
-
 	return (
 		<Form {...form}>
 			<form
