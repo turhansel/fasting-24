@@ -73,15 +73,16 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 	const [progressValue, setProgressValue] = useState(0);
 
 	const getPayload = useCallback(
-		(values: z.infer<typeof FastingFormSchema>) => {
+		(values: z.infer<typeof FastingFormSchema>, isManual: boolean) => {
 			const baseDate = dayjs().format('YYYY-MM-DD');
+			const endDate = isManual
+				? dayjs().format('HH:mm')
+				: values.end_date;
 
 			let startDateTimeStamp = dayjs(
 				`${baseDate}T${values.start_date}:00`
 			);
-			let endDateTimeStamp = dayjs(
-				`${baseDate}T${dayjs().format('HH:mm')}:00`
-			);
+			let endDateTimeStamp = dayjs(`${baseDate}T${endDate}:00`);
 
 			if (endDateTimeStamp.isBefore(startDateTimeStamp)) {
 				endDateTimeStamp = endDateTimeStamp.add(1, 'day');
@@ -108,8 +109,14 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 		setProgressValue(progress);
 	}, [elapsed, totalDuration]);
 
-	const onSubmit = async (values: z.infer<typeof FastingFormSchema>) => {
-		const payload = getPayload(values);
+	const handleCompleteFasting = async ({
+		isManual,
+		values,
+	}: {
+		isManual: boolean;
+		values?: z.infer<typeof FastingFormSchema>;
+	}) => {
+		const payload = getPayload(values ?? getValues(), isManual);
 		try {
 			const result = await updateMutation({
 				fastingId: inProgressFasting?.id!,
@@ -122,10 +129,13 @@ const FastingInProgressForm: React.FC<DraftFormResponse> = ({
 			toast.error(message ?? 'Unknown error');
 		}
 	};
+	const onSubmit = async (values: z.infer<typeof FastingFormSchema>) => {
+		handleCompleteFasting({ isManual: true, values });
+	};
 
 	const handleComplete = async () => {
 		toast.info('Congrats! You have completed your fasting.');
-		await onSubmit(getValues());
+		await handleCompleteFasting({ isManual: false });
 	};
 
 	const coundtDown = useCountdown({
