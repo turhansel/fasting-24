@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
 	Form,
@@ -26,8 +25,6 @@ import { LoginSchema } from '@/lib/redux/features/auth/schemas';
 import Link from 'next/link';
 
 export default function Login() {
-	const router = useRouter();
-
 	const [signIn, { isLoading }] = useSignInMutation();
 
 	const form = useForm<z.infer<typeof LoginSchema>>({
@@ -42,7 +39,7 @@ export default function Login() {
 		try {
 			const result = await signIn(values).unwrap();
 
-			result?.status === 200 && router.push('/');
+			result?.status === 200 && window.location.reload();
 			result?.status === 400 && toast.error(result.message);
 		} catch (error: any) {
 			const message = error?.data?.message;
