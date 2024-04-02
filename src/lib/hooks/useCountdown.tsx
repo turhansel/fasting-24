@@ -13,18 +13,14 @@ export default function useCountdown({
 
 	useEffect(() => {
 		const timer = setInterval(() => {
-			setTimeLeft((prevTimeLeft) => {
-				if (prevTimeLeft <= 0) {
-					clearInterval(timer);
-					if (onEnd) {
-						onEnd();
-					}
-
-					return 0;
+			if (timeLeft <= 0) {
+				clearInterval(timer);
+				if (onEnd) {
+					onEnd();
 				}
-
-				return prevTimeLeft - 1;
-			});
+				return;
+			}
+			setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
 		}, interval);
 
 		return () => {
