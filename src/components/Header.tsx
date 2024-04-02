@@ -1,22 +1,38 @@
 'use client';
 
 import Link from 'next/link';
-import { redirect, useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { toast } from 'sonner';
 import { useSignOutMutation } from '@/lib/redux/features/auth/authApiSlice';
 import { LogOutIcon } from 'lucide-react';
+import { createClient } from '@/lib/supabase/client';
+
+const getUserIsUserAuthenticated = async () => {
+	const supabase = createClient();
+
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+
+	return user ? true : false;
+};
 
 export default function Header() {
-	const router = useRouter();
+	const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+
+	useEffect(() => {
+		getUserIsUserAuthenticated().then((isAuthenticated) => {
+			setIsUserAuthenticated(isAuthenticated);
+		});
+	}, []);
 
 	const [signOut] = useSignOutMutation();
 
 	const handleSignOut = async () => {
 		try {
 			await signOut();
-			router.refresh();
+			window.location.reload();
 		} catch (error: any) {
 			const message = error?.data?.message;
 			message && toast.error(message as string);
@@ -41,13 +57,15 @@ export default function Header() {
 				</h1>
 			</Link>
 
-			<Button
-				onClick={handleSignOut}
-				variant={'secondary'}
-				className='p-[10px] rounded-full bg-[#D6D6D6] text-black absolute right-2 md:right-32'
-			>
-				<LogOutIcon size={16} />
-			</Button>
+			{isUserAuthenticated && (
+				<Button
+					onClick={handleSignOut}
+					variant={'secondary'}
+					className='p-[10px] rounded-full bg-[#D6D6D6] text-black absolute right-2 md:right-32'
+				>
+					<LogOutIcon size={16} />
+				</Button>
+			)}
 		</header>
 	);
 }
